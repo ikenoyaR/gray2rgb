@@ -26,8 +26,13 @@ class Sun_dataset(Dataset):
     def __getitem__(self, idx):
         img_path = self.img_path_list[idx]
         image = cv2.imread(img_path)
-        target_image = image
+        target_image = self.img_processing(image)
+        gray_image = self.RGB2GRAY(target_image)
+        return (gray_image, target_image)
 
     def img_processing(img):
-        pass
+        return img
+
+    def RGB2GRAY(img):
+        return img
 
