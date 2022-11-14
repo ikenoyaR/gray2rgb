@@ -31,8 +31,23 @@ class Sun_dataset(Dataset):
         return (gray_image, target_image)
 
     def img_processing(img):
-        return img
+        return img[:, :, ::-1]
 
     def RGB2GRAY(img):
-        return img
+        if np.random.rand() >= 0.5:
+            gray_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+        else:
+            a, b = np.random.normal(loc=1.0, scale=0.05), np.random.normal(loc=1.0, scale=0.05)
+            gray_img = 0.299 * a * img[:, :, 0] + 0.587 * b * img[:, :, 1] + (1-0.299*a-0.587*b) * img[:, :, 2]
+            gray_img = gray_img.astype('np.uint8')
+        return gray_img
 
+
+def main(args):
+    dataset = Sun_dataset(args.source)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--source', type=str, default='inference/images', help='source')
+    args = parser.parse_args()
+    main(args)
