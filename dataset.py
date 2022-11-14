@@ -28,7 +28,11 @@ class Sun_dataset(Dataset):
         image = cv2.imread(img_path)
         target_image = self.img_processing(image)
         gray_image = self.RGB2GRAY(target_image)
-        return (gray_image, target_image)
+        if self.transform:
+            image = self.transform(image)
+        if self.target_transform:
+            target_image = self.target_transform(target_image)
+        return gray_image, target_image
 
     def img_processing(img):
         return img[:, :, ::-1]
@@ -44,10 +48,12 @@ class Sun_dataset(Dataset):
 
 
 def main(args):
-    dataset = Sun_dataset(args.source)
+    if args.mode == 'debug':
+        dataset = Sun_dataset(args.source)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--source', type=str, default='inference/images', help='source')
+    parser.add_argument('--mode', default='debug', choices=['train', 'test', 'predict', 'debug'], help='choose modes train or test or predict')
     args = parser.parse_args()
     main(args)

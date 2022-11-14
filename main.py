@@ -20,7 +20,7 @@ if __name__ == '__main__':
     parser.add_argument('--nosave', action='store_true', help='do not save images/videos')
     parser.add_argument('--project', default='runs/RGB_image', help='save results to project/name')
     parser.add_argument('--name', default='exp', help='save results to project/name')
-    parser.add_argument('--mode', default='test', choices=['train', 'test', 'predict'], help='choose modes train or test or predict')
+    parser.add_argument('--mode', default='test', choices=['train', 'test', 'predict', 'debug'], help='choose modes train or test or predict')
     args = parser.parse_args()
     print(args)
     main(args)
