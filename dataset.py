@@ -14,9 +14,10 @@ from torch.utils.data import Dataset
 
 
 class Sun_dataset(Dataset):
-    def __init__(self, data_path, transform=None, target_transform=None):
+    def __init__(self, data_path, train = True, transform=None, target_transform=None):
         self.data_path = data_path
-        self.img_path_list = glob.glob(os.path.join(data_path, '*', '*.jpg'))
+        self.train = train
+        self.img_path_list = glob.glob(os.path.join(data_path, '*', '*', '*.jpg'))
         self.transform = transform
         self.target_transform = target_transform
     
