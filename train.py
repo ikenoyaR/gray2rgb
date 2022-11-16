@@ -8,6 +8,7 @@ from PIL import Image
 import numpy as np
 import cv2
 import torch
+import torchvision
 
-def train():
+def train(args):
     pass

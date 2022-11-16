@@ -4,7 +4,7 @@ from train import train
 
 def main(args):
     if args.mode == 'train':
-        pass
+        train(args)
     elif args.mode =='test':
         pass
     elif args.mode == 'predict':
